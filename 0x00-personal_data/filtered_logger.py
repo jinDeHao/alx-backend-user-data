@@ -4,7 +4,7 @@ filtered logger
 """
 import csv
 import re
-from typing import List
+from typing import List, Tuple
 import logging
 
 
@@ -63,7 +63,7 @@ def get_logger() -> logging.Logger:
     return logger
 
 
-PII_FIELDS: List[str]
+PII_FIELDS: Tuple[str]
 
 
 """Open the CSV file"""
@@ -73,4 +73,4 @@ with open('user_data.csv', 'r') as file:
     """
     csv_reader = csv.reader(file)
 
-    PII_FIELDS = [f for f in list(csv_reader)[0] if f != 'Count']
+    PII_FIELDS = tuple([f for f in list(csv_reader)[0] if f != 'Count'])
