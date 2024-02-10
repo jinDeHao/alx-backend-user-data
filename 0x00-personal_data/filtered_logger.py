@@ -10,9 +10,5 @@ def filter_datum(fields, redaction, message, separator):
     """
     new_message = message
     for field in fields:
-        new_message = re.sub(f"(?<={field}=)[^{separator}]*",
-                              redaction,
-                              new_message,
-                              count=0,
-                              flags=0)
+        new_message = re.sub(f"(?<={field}=)[^{separator}]*", redaction, new_message, count=0, flags=0)
     return new_message
