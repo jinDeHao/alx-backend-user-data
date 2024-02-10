@@ -73,4 +73,4 @@ with open('user_data.csv', 'r') as file:
     """
     csv_reader = csv.reader(file)
 
-    PII_FIELDS = tuple([f for f in list(csv_reader)[0] if f != 'Rank'])
+    PII_FIELDS = tuple([f for f in list(csv_reader)[0] if f != 'Count'])
