@@ -2,6 +2,7 @@
 """
 filtered logger
 """
+import csv
 import re
 from typing import List
 import logging
@@ -48,3 +49,25 @@ class RedactingFormatter(logging.Formatter):
                                   record.msg,
                                   self.SEPARATOR)
         return super().format(record)
+
+
+def get_logger() -> logging.Logger:
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    handler = logging.StreamHandler()
+    handler.setFormatter(RedactingFormatter)
+    logger.addHandler(handler)
+    return logger
+
+
+PII_FIELDS = []
+
+
+"""Open the CSV file"""
+with open('user_data.csv', 'r') as file:
+    """
+    Create a CSV reader object
+    """
+    csv_reader = csv.reader(file)
+
+    PII_FIELDS = [f for f in list(csv_reader)[0] if f != 'Count']
