@@ -60,7 +60,7 @@ def get_logger() -> logging.Logger:
     return logger
 
 
-PII_FIELDS = []
+PII_FIELDS: List[str]
 
 
 """Open the CSV file"""
