@@ -64,7 +64,7 @@ def get_logger() -> logging.Logger:
 
 
 PII_FIELDS: Tuple[str]
-NOT_PII = ["last_login", "user_agent"]
+NOT_PII = ["last_login", "user_agent", "ip"]
 
 """Open the CSV file"""
 with open('user_data.csv', 'r') as file:
