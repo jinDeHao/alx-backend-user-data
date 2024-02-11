@@ -8,6 +8,19 @@ from typing import List, Tuple
 import logging
 
 
+PII_FIELDS: Tuple[str]
+NOT_PII = ["last_login", "user_agent", "ip"]
+
+"""Open the CSV file"""
+with open('user_data.csv', 'r') as file:
+    """
+    Create a CSV reader object
+    """
+    csv_reader = csv.reader(file)
+
+    PII_FIELDS = tuple([f for f in list(csv_reader)[0] if f not in NOT_PII])
+
+
 def filter_datum(fields: List[str],
                  redaction: str,
                  message: str,
@@ -57,20 +70,8 @@ def get_logger() -> logging.Logger:
     """
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
+    logger.propagate = False
     handler = logging.StreamHandler()
-    handler.setFormatter(RedactingFormatter)
+    handler.setFormatter(RedactingFormatter(PII_FIELDS))
     logger.addHandler(handler)
     return logger
-
-
-PII_FIELDS: Tuple[str]
-NOT_PII = ["last_login", "user_agent", "ip"]
-
-"""Open the CSV file"""
-with open('user_data.csv', 'r') as file:
-    """
-    Create a CSV reader object
-    """
-    csv_reader = csv.reader(file)
-
-    PII_FIELDS = tuple([f for f in list(csv_reader)[0] if f not in NOT_PII])
