@@ -64,7 +64,7 @@ def get_logger() -> logging.Logger:
 
 
 PII_FIELDS: Tuple[str]
-
+NOT_PII = ["last_login", "user_agent"]
 
 """Open the CSV file"""
 with open('user_data.csv', 'r') as file:
@@ -73,4 +73,4 @@ with open('user_data.csv', 'r') as file:
     """
     csv_reader = csv.reader(file)
 
-    PII_FIELDS = tuple([f for f in list(csv_reader)[0] if f != 'Ethnicity'])
+    PII_FIELDS = tuple([f for f in list(csv_reader)[0] if f not in NOT_PII])
