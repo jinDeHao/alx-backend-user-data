@@ -96,6 +96,9 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 
 
 def main() -> None:
+    """
+    Read and filter
+    """
     logger = get_logger()
     db = get_db()
     cursor = db.cursor()
