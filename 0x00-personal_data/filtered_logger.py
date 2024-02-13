@@ -83,9 +83,9 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     """
     Connect to secure database
     """
-    PERSONAL_DATA_DB_USERNAME = getenv("PERSONAL_DATA_DB_USERNAME")
-    PERSONAL_DATA_DB_PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD")
-    PERSONAL_DATA_DB_HOST = getenv("PERSONAL_DATA_DB_HOST")
+    PERSONAL_DATA_DB_USERNAME = getenv("PERSONAL_DATA_DB_USERNAME", "root")
+    PERSONAL_DATA_DB_PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD", "")
+    PERSONAL_DATA_DB_HOST = getenv("PERSONAL_DATA_DB_HOST", "localhost")
     PERSONAL_DATA_DB_NAME = getenv("PERSONAL_DATA_DB_NAME")
     return mysql.connector.connect(
         user=PERSONAL_DATA_DB_USERNAME,
