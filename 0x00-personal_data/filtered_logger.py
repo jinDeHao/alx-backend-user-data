@@ -7,7 +7,7 @@ import re
 from typing import List, Tuple
 import logging
 import mysql.connector
-from os import getenv
+import os
 
 
 PII_FIELDS: Tuple[str]
@@ -83,13 +83,13 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     """
     Connect to secure database
     """
-    PERSONAL_DATA_DB_USERNAME = getenv("PERSONAL_DATA_DB_USERNAME", "root")
-    PERSONAL_DATA_DB_PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD", "")
-    PERSONAL_DATA_DB_HOST = getenv("PERSONAL_DATA_DB_HOST", "localhost")
-    PERSONAL_DATA_DB_NAME = getenv("PERSONAL_DATA_DB_NAME")
+    DB_USERNAME = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
+    DB_PASSWORD = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
+    DB_HOST = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
+    DB_NAME = os.getenv("PERSONAL_DATA_DB_NAME")
     return mysql.connector.connect(
-        user=PERSONAL_DATA_DB_USERNAME,
-        password=PERSONAL_DATA_DB_PASSWORD,
-        host=PERSONAL_DATA_DB_HOST,
-        database=PERSONAL_DATA_DB_NAME
+        user=DB_USERNAME,
+        password=DB_PASSWORD,
+        host=DB_HOST,
+        database=DB_NAME
     )
