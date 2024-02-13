@@ -5,7 +5,7 @@ Encrypting passwords
 import bcrypt
 
 
-def hash_password(password: str) -> str:
+def hash_password(password: str) -> bytes:
     """
     I use the bcrypt package to perform
     the hashing (with hashpw).
