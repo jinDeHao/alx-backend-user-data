@@ -85,11 +85,11 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     """
     PERSONAL_DATA_DB_USERNAME = getenv("PERSONAL_DATA_DB_USERNAME")
     PERSONAL_DATA_DB_PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD")
-    PERSONAL_DATA_DB_HOST  = getenv("PERSONAL_DATA_DB_HOST")
+    PERSONAL_DATA_DB_HOST = getenv("PERSONAL_DATA_DB_HOST")
     PERSONAL_DATA_DB_NAME = getenv("PERSONAL_DATA_DB_NAME")
     return mysql.connector.connect(
-    user=PERSONAL_DATA_DB_USERNAME,
-    password=PERSONAL_DATA_DB_PASSWORD,
-    host=PERSONAL_DATA_DB_HOST,
-    database=PERSONAL_DATA_DB_NAME
+        user=PERSONAL_DATA_DB_USERNAME,
+        password=PERSONAL_DATA_DB_PASSWORD,
+        host=PERSONAL_DATA_DB_HOST,
+        database=PERSONAL_DATA_DB_NAME
     )
