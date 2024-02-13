@@ -6,6 +6,8 @@ import csv
 import re
 from typing import List, Tuple
 import logging
+import mysql.connector
+from os import getenv
 
 
 PII_FIELDS: Tuple[str]
@@ -75,3 +77,19 @@ def get_logger() -> logging.Logger:
     handler.setFormatter(RedactingFormatter(PII_FIELDS))
     logger.addHandler(handler)
     return logger
+
+
+def get_db():
+    """
+    Connect to secure database
+    """
+    PERSONAL_DATA_DB_USERNAME = getenv("PERSONAL_DATA_DB_USERNAME")
+    PERSONAL_DATA_DB_PASSWORD = getenv("PERSONAL_DATA_DB_PASSWORD")
+    PERSONAL_DATA_DB_HOST  = getenv("PERSONAL_DATA_DB_HOST")
+    PERSONAL_DATA_DB_NAME = getenv("PERSONAL_DATA_DB_NAME")
+    return mysql.connector.connect(
+    user=PERSONAL_DATA_DB_USERNAME,
+    password=PERSONAL_DATA_DB_PASSWORD,
+    host=PERSONAL_DATA_DB_HOST,
+    database=PERSONAL_DATA_DB_NAME
+    )
