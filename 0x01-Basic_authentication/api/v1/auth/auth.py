@@ -14,7 +14,17 @@ class Auth:
         """
         public method
         """
+        if path is None or\
+            excluded_paths is None or\
+                  excluded_paths == []:
+            return True
+        if not path.endswith("/"):
+            path += "/"
+        if path not in excluded_paths:
+            return True
         return False
+
+
 
     def authorization_header(self,
                              request=None) -> str:
@@ -22,6 +32,7 @@ class Auth:
         public method
         """
         return None
+
 
     def current_user(self, request=None) -> TypeVar('User'):
         """
