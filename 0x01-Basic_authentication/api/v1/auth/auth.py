@@ -4,6 +4,7 @@ Auth class
 """
 from flask import request
 from typing import List, TypeVar
+from fnmatch import fnmatch
 
 
 class Auth:
@@ -18,6 +19,9 @@ class Auth:
             return True
         if not path.endswith("/"):
             path += "/"
+        for ex_path in excluded_paths:
+            if fnmatch(path, ex_path):
+                return False
         if path not in excluded_paths:
             return True
         return False
