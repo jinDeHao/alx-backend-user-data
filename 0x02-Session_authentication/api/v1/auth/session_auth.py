@@ -34,6 +34,5 @@ class SessionAuth(Auth):
         Use Session ID for identifying a User
         """
         from models.user import User
-        session_id = self.session_cookie(request)
-        user_id = self.user_id_for_session_id(session_id)
-        return User.get(user_id)
+        return User.get(self.user_id_for_session_id(
+            self.session_cookie(request)))
