@@ -19,10 +19,10 @@ def login() -> str:
         return jsonify({"error": "password missing"}), 400
     """get the user from the database using the email"""
     user_list = User.search({'email': email})
-    user = user_list[0]
     """check if the user exists"""
-    if not user_list:
+    if not user_list or user_list == []:
         return jsonify({"error": "no user found for this email"}), 404
+    user = user_list[0]
     """check if the password is valid"""
     if not user.is_valid_password(password):
         return jsonify({"error": "wrong password"}), 401
@@ -32,7 +32,7 @@ def login() -> str:
     """get the session name from variable envirenement"""
     SESSION_NAME = os.getenv("SESSION_NAME")
     """make a response using user data"""
-    response = jsonify(user.to_json())
+    response = make_response(user.to_json())
     """set a cookie for the session id"""
     response.set_cookie(SESSION_NAME, session_id)
     return response
