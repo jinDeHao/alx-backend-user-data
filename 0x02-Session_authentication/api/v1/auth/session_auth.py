@@ -4,6 +4,7 @@ session of authentication
 """
 from .auth import Auth
 import uuid
+from models.user import User
 
 
 class SessionAuth(Auth):
@@ -29,10 +30,10 @@ class SessionAuth(Auth):
             not isinstance(session_id, str)\
             else self.user_id_by_session_id[session_id]
 
-    def current_user(self, request=None):
-        """
-        Use Session ID for identifying a User
-        """
-        from models.user import User
-        return User.get(self.user_id_for_session_id(
-            self.session_cookie(request)))
+    # def current_user(self, request=None):
+    #     """
+    #     Use Session ID for identifying a User
+    #     """
+    #     session_id = self.session_cookie(request)
+    #     user_id = self.user_id_for_session_id(session_id)
+    #     return User.get(user_id)
