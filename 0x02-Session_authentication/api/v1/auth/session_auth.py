@@ -4,7 +4,6 @@ session of authentication
 """
 from .auth import Auth
 import uuid
-from models.user import User
 
 
 class SessionAuth(Auth):
@@ -34,8 +33,7 @@ class SessionAuth(Auth):
         """
         Use Session ID for identifying a User
         """
+        from models.user import User
         session_id = self.session_cookie(request)
         user_id = self.user_id_for_session_id(session_id)
-        if user_id is None:
-            return None
         return User.get(user_id)
