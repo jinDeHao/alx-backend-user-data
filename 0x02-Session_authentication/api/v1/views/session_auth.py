@@ -32,7 +32,7 @@ def login() -> str:
     """get the session name from variable envirenement"""
     SESSION_NAME = os.getenv("SESSION_NAME")
     """make a response using user data"""
-    response = make_response(user.to_json())
+    response = jsonify(user.to_json())
     """set a cookie for the session id"""
-    response.set_cookie(key=SESSION_NAME, value=session_id)
+    response.set_cookie(SESSION_NAME, session_id)
     return response
