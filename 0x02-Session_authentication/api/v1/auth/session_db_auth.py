@@ -4,7 +4,6 @@ session of authentication
 """
 from .session_exp_auth import SessionExpAuth
 import uuid
-from models.base import DATA
 import os
 from datetime import datetime, timedelta
 from models.user_session import UserSession
@@ -58,7 +57,5 @@ class SessionDBAuth(SessionExpAuth):
             return None
         if user_session is None or user_session == []:
             return False
-        user_session_id = user_session[0].id
-        del DATA["UserSession"][user_session_id]
-        UserSession.save_to_file()
+        user_session[0].remove()
         return True
