@@ -26,9 +26,9 @@ def login() -> str:
     """check if the password is valid"""
     if not user.is_valid_password(password):
         return jsonify({"error": "wrong password"}), 401
-    from api.v1.auth.session_auth import SessionAuth
+    from api.v1.app import auth
     """create a session for a user"""
-    session_id = SessionAuth().create_session(user.id)
+    session_id = auth.create_session(user.id)
     """get the session name from variable envirenement"""
     SESSION_NAME = os.getenv("SESSION_NAME")
     """make a response using user data"""
