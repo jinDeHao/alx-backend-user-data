@@ -32,13 +32,17 @@ class SessionDBAuth(SessionExpAuth):
         """
         if session_id is None:
             return None
-        # UserSession.load_from_file()
-        try:
-            user_session = UserSession.search({"session_id": session_id})
-        except Exception:
-            return None
+        user_session = UserSession.search({"session_id": session_id})
         if user_session is None or user_session == []:
             return None
+
+        self.db_user = user_session[0]
+        if super().user_id_for_session_id(session_id) is None:
+            return None
+        # UserSession.load_from_file()
+        # user_session = UserSession.search({"session_id": session_id})
+        # if user_session is None or user_session == []:
+        #     return None
 
         return user_session[0].user_id
 

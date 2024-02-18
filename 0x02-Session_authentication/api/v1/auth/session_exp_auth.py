@@ -37,8 +37,16 @@ class SessionExpAuth(SessionAuth):
 
     def user_id_for_session_id(self, session_id=None):
         """user id for session id"""
-        if session_id is None or session_id not in self.user_id_by_session_id:
+        if session_id is None:
             return None
+        if session_id not in self.user_id_by_session_id:
+            if hasattr(self, "db_user"):
+                diction = {}
+                diction['user_id'] = self.db_user.id
+                diction['created_at'] = self.db_user.created_at
+                self.user_id_by_session_id[session_id] = diction
+            else:
+                return None
         if self.session_duration <= 0:
             return self.user_id_by_session_id[session_id]["user_id"]
         if "created_at" not in self.user_id_by_session_id[session_id]:
