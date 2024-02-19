@@ -7,7 +7,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 Base = declarative_base()
 
+
 class User(Base):
+    """
+    atabase table named users
+    """
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
