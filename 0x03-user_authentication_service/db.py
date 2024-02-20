@@ -34,7 +34,7 @@ class DB:
     def add_user(
             self,
             email: str,
-            hashed_password: str) -> TypeVar("User"):
+            hashed_password: str) -> User:
         """
         adds a new user
         """
