@@ -49,6 +49,8 @@ class DB:
         """
         Find user by his attributes
         """
+        if not args:
+            raise InvalidRequestError
         try:
             user = self._session.query(User).filter_by(**args).first()
         except Exception:
