@@ -45,7 +45,7 @@ class DB:
         self._session.commit()
         return user
 
-    def find_user_by(self, **args):
+    def find_user_by(self, **args: dict) -> User:
         """
         Find user by his attributes
         """
@@ -56,3 +56,18 @@ class DB:
         if user is None:
             raise NoResultFound
         return user
+
+    def update_user(self,
+                    user_id: int,
+                    **args: dict) -> None:
+        """
+        update a targeted user
+        """
+        targeted_user = self.find_user_by(**{"id": user_id})
+        for key, val in args.items():
+            if hasattr(targeted_user, key):
+                if type(getattr(targeted_user, key)) is type(val):
+                    setattr(targeted_user, key, val)
+                    continue
+            raise ValueError
+        self._session.commit()
