@@ -17,18 +17,12 @@ class Auth:
         auth contractor method"""
         self._db = DB()
 
-    def _generate_uuid(self) -> str:
-        """
-        generate a new uuid
-        """
-        return str(uuid.uuid4())
-
     def create_session(self, email) -> str:
         """
         session creation
         """
         user = self._db.find_user_by(email=email)
-        user.session_id = self._generate_uuid()
+        user.session_id = _generate_uuid()
         return user.session_id
 
     def register_user(self, email: str, password: str) -> TypeVar("User"):
@@ -59,3 +53,10 @@ def _hash_password(pwd: str) -> bytes:
     Hash password
     """
     return hashpw(pwd.encode('utf8'), gensalt())
+
+
+def _generate_uuid() -> str:
+    """
+    generate a new uuid
+    """
+    return str(uuid.uuid4())
