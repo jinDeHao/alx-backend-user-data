@@ -50,7 +50,7 @@ def logout():
     """
     go back to home page
     """
-    redirect('/')
+    return redirect('/')
 
 
 if __name__ == "__main__":
