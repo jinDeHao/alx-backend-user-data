@@ -39,5 +39,17 @@ def login():
         abort(401)
 
 
+@app.route("/sessions", methods=['DELETE'])
+def logout():
+    """log out"""
+    session_ID = request.cookies.get("session_id")
+    user = AUTH.get_user_from_session_id(session_ID)
+    AUTH.destroy_session(user.id)
+    """
+    go back to home page
+    """
+    wellcome()
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
