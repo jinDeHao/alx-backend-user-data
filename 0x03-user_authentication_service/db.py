@@ -66,7 +66,8 @@ class DB:
         targeted_user = self.find_user_by(**{"id": user_id})
         for key, val in args.items():
             if hasattr(targeted_user, key):
-                if type(getattr(targeted_user, key)) is type(val):
+                if val is None or\
+                        type(getattr(targeted_user, key)) is type(val):
                     setattr(targeted_user, key, val)
                     continue
             raise ValueError
