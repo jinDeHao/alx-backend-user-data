@@ -2,7 +2,7 @@
 """
 authentication methods
 """
-from bcrypt import hashpw, gensalt
+from bcrypt import hashpw, gensalt, checkpw
 from db import DB, NoResultFound
 from typing import TypeVar
 
@@ -27,6 +27,16 @@ class Auth:
             hp = _hash_password(password)
             user = self._db.add_user(email, hp)
             return user
+
+    def valid_login(self, email: str, password: str) -> bool:
+        """check if valid"""
+        try:
+            user = self._db.find_user_by(email=email)
+            if checkpw(password.encode('utf-8'), user.hashed_password):
+                return True
+        except NoResultFound:
+            return False
+        return False
 
 
 def _hash_password(pwd: str) -> bytes:
