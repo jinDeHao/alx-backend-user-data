@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask, request, jsonify, abort, make_response
+from flask import Flask, request, jsonify, abort, make_response, redirect
 from auth import Auth
 
 
@@ -48,7 +48,7 @@ def logout():
     """
     go back to home page
     """
-    wellcome()
+    redirect('/')
 
 
 if __name__ == "__main__":
