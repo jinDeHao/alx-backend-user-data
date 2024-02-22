@@ -18,18 +18,29 @@ def register_user(email: str, password: str) -> None:
 
 
 def log_in_wrong_password(email: str, password: str) -> None:
+    """log_in_wrong_password"""
     pass
 def log_in(email: str, password: str) -> str:
+    """log in"""
     pass
 def profile_unlogged() -> None:
+    """
+    profile unlogged
+    """
     pass
 def profile_logged(session_id: str) -> None:
+    """
+    profile logged
+    """
     pass
 def log_out(session_id: str) -> None:
+    """log out"""
     pass
 def reset_password_token(email: str) -> str:
+    """reset passwd token"""
     pass
 def update_password(email: str, reset_token: str, new_password: str) -> None:
+    """update passwd"""
     pass
 
 
